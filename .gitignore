@@ -1,4 +1,9 @@
 */target/*
 */.idea/*
 .idea/*
+.gradle/*
+build/*
 target/*
+heroe-book-event.iml
+heroe-book-event.ipr
+heroe-book-event.iws
