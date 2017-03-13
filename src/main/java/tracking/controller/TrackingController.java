@@ -1,19 +1,21 @@
 package tracking.controller;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import tracking.service.TrackingService;
+import tracking.model.TrackingVisitedBook;
 
 @RestController
 public class TrackingController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+    @Autowired
+    private TrackingService trackingService;
 
     @RequestMapping("/greeting")
-    public void track(@RequestParam(value="name", defaultValue="World") String name) {
-     }
+    public void track(@RequestParam(value="authorId") Integer authorId, @RequestParam(value="bookId") Integer bookId) {
+
+        this.trackingService.visitBookAction(new TrackingVisitedBook(authorId,bookId));
+    }
 }
