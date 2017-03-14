@@ -16,6 +16,6 @@ public class TrackingController {
     @RequestMapping("/greeting")
     public void track(@RequestParam(value="authorId") Integer authorId, @RequestParam(value="bookId") Integer bookId) {
 
-        this.trackingService.visitBookAction(new TrackingVisitedBook(authorId,bookId));
+        this.trackingService.visitBookAction(TrackingVisitedBook.builder().bookId(bookId).authorId(authorId).build());
     }
 }
