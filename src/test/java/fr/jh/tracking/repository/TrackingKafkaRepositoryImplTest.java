@@ -1,5 +1,7 @@
 package fr.jh.tracking.repository;
 
+import fr.jh.tracking.constants.TrackingConstants;
+import fr.jh.tracking.model.TrackingVisitedBook;
 import kafka.admin.AdminUtils;
 import kafka.admin.RackAwareMode;
 import kafka.server.KafkaConfig;
@@ -20,10 +22,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import fr.jh.tracking.model.TrackingVisitedBook;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -45,8 +45,6 @@ public class TrackingKafkaRepositoryImplTest {
     private static final String ZKHOST = "127.0.0.1";
     private static final String BROKERHOST = "127.0.0.1";
     private static final String BROKERPORT = "9092";
-    private static final String TOPIC = "test";
-
 
     @Before
     public void setUp() throws IOException {
@@ -67,7 +65,7 @@ public class TrackingKafkaRepositoryImplTest {
         KafkaServer kafkaServer = TestUtils.createServer(config, mock);
 
         // create topic
-        AdminUtils.createTopic(zkUtils, TOPIC, 1, 1, new Properties(), RackAwareMode.Disabled$.MODULE$);
+        AdminUtils.createTopic(zkUtils, TrackingConstants.TOPIC_BOOK, 1, 1, new Properties(), RackAwareMode.Disabled$.MODULE$);
     }
 
     @Test
@@ -77,20 +75,21 @@ public class TrackingKafkaRepositoryImplTest {
         consumerProps.setProperty("group.id", "group0");
         consumerProps.setProperty("client.id", "consumer0");
         consumerProps.setProperty("key.deserializer","org.apache.kafka.common.serialization.IntegerDeserializer");
-        consumerProps.setProperty("value.deserializer", "org.apache.kafka.common.serialization.ByteArrayDeserializer");
+        consumerProps.setProperty("value.deserializer", "fr.jh.tracking.serializer.VisitedBookDeserializer");
         consumerProps.put("auto.offset.reset", "earliest");  // to make sure the consumer starts from the beginning of the topic
-        KafkaConsumer<Integer, byte[]> consumer = new KafkaConsumer<>(consumerProps);
-        consumer.subscribe(Arrays.asList(TOPIC));
+        KafkaConsumer<Integer,TrackingVisitedBook> consumer = new KafkaConsumer<>(consumerProps);
+        consumer.subscribe(Arrays.asList(TrackingConstants.TOPIC_BOOK));
 
-        this.trackingRepository.visitBookAction(TrackingVisitedBook.builder().bookId(1).authorId(2).build());
+        this.trackingRepository.visitBookAction(new TrackingVisitedBook(2,1));
 
-        ConsumerRecords<Integer, byte[]> records = consumer.poll(4000);
+        ConsumerRecords<Integer, TrackingVisitedBook> records = consumer.poll(4000);
         assertEquals(1, records.count());
-        Iterator<ConsumerRecord<Integer, byte[]>> recordIterator = records.iterator();
-        ConsumerRecord<Integer, byte[]> record = recordIterator.next();
+        Iterator<ConsumerRecord<Integer, TrackingVisitedBook>> recordIterator = records.iterator();
+        ConsumerRecord<Integer,TrackingVisitedBook> record = recordIterator.next();
         System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value());
         assertEquals(42, (int) record.key());
-        assertEquals("test-message", new String(record.value(), StandardCharsets.UTF_8));
+        assertEquals(new Integer(2), record.value().getAuthorId());
+        assertEquals(new Integer(1), record.value().getBookId());
 
     }
 }
