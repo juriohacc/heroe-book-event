@@ -6,8 +6,8 @@ import lombok.ToString;
 @ToString
 public class TrackingVisitedBook {
 
-     @Getter
-     private Integer authorId;
+    @Getter
+    private Integer authorId;
 
     @Getter
     private Integer bookId;

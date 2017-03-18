@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import fr.jh.utils.ConsumerInput;
-import fr.jh.utils.KafkaConfSample;
-import fr.jh.utils.KafkaServiceTest;
+import fr.jh.kafka.test.ConsumerInput;
+import fr.jh.kafka.test.KafkaConfSample;
+import fr.jh.kafka.test.KafkaServiceTest;
 
 import java.io.IOException;
 import java.util.Arrays;

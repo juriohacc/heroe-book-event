@@ -1,9 +1,16 @@
 package fr.jh.tracking.controller;
 
-/**
- * Created by julien on 13/03/2017.
- */
+import lombok.Value;
+
+import javax.validation.constraints.NotNull;
 
 
+@Value
 public class TrackingRequest {
+
+    @NotNull
+    private Integer authorId;
+
+    @NotNull
+    private Integer bookId;
 }
