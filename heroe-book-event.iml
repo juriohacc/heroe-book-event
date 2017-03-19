@@ -150,7 +150,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.scala-lang:scala-library:2.10.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.apache.zookeeper:zookeeper:3.4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.apache.kafka:kafka_2.10:0.10.2.0:test" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.101tec:zkclient:0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: jline:jline:0.9.94" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: io.netty:netty:3.10.5.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.apache.kafka:kafka-clients:0.10.2.0:test" level="project" />
@@ -163,5 +162,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.kafka:kafka_2.10:0.10.2.0:test" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.kafka:kafka-clients:0.10.2.0:test" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.kafka:kafka_2.10:0.10.2.0:test" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.101tec:zkclient:0.7" level="project" />
   </component>
 </module>
