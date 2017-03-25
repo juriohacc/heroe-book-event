@@ -59,7 +59,7 @@ public class TrackingKafkaRepositoryImplTest {
 
         consumer.subscribe(Arrays.asList(TrackingConstants.TOPIC_BOOK));
 
-        this.trackingRepository.visitBookAction(new TrackingVisitedBook(2,1));
+        this.trackingRepository.visitBookAction(new TrackingVisitedBook("2","1"));
 
         ConsumerRecords<Integer, TrackingVisitedBook> records = consumer.poll(4000);
         assertEquals(1, records.count());
@@ -68,8 +68,8 @@ public class TrackingKafkaRepositoryImplTest {
         System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value());
 
         assertEquals(42, (int) record.key());
-        assertEquals(new Integer(2), record.value().getAuthorId());
-        assertEquals(new Integer(1), record.value().getBookId());
+        assertEquals("2", record.value().getAuthorId());
+        assertEquals("1", record.value().getBookId());
 
     }
 }

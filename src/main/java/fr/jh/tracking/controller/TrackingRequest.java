@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 public class TrackingRequest {
 
     @NotNull
-    private Integer authorId;
+    private String authorId;
 
     @NotNull
-    private Integer bookId;
+    private String bookId;
 }

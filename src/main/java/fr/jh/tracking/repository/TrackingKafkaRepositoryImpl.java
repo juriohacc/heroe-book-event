@@ -27,7 +27,7 @@ public class TrackingKafkaRepositoryImpl implements TrackingRepository{
     @Override
     public void visitBookAction(TrackingVisitedBook trackingVisitedBook) {
 
-        this.log.info("produce message for visitBookAction for input : ",trackingVisitedBook);
+        this.log.info("produce message for visitBookAction for input :  {} ",trackingVisitedBook);
         KafkaProducer<Integer, TrackingVisitedBook> producer = new KafkaProducer<Integer, TrackingVisitedBook>(getTrackingVisitBookBrokerProperties());
         ProducerRecord<Integer,TrackingVisitedBook> data = new ProducerRecord<>(TrackingConstants.TOPIC_BOOK, 42, trackingVisitedBook);
         producer.send(data);

@@ -36,7 +36,7 @@ public class TrackingControllerTest {
 
     @Test
     public void trackVisitBook_authorId_ShouldReturnError() throws Exception {
-        TrackingRequest trackingVisitedBook = new TrackingRequest(null,1);
+        TrackingRequest trackingVisitedBook = new TrackingRequest(null,"1");
 
         this.mvc.perform(post("/visit-book")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -50,7 +50,7 @@ public class TrackingControllerTest {
 
     @Test
     public void trackVisitBook_bookId_ShouldReturnError() throws Exception {
-        TrackingRequest trackingVisitedBook = new TrackingRequest(1,null);
+        TrackingRequest trackingVisitedBook = new TrackingRequest("1",null);
 
         this.mvc.perform(post("/visit-book")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -66,7 +66,7 @@ public class TrackingControllerTest {
     public void trackVisitBook_withGoodInputs_ShouldReturn_OK() throws Exception {
 //        given(this.trackingService.visitBookAction(new TrackingVisitedBook(null,1)))
 //                .will
-        TrackingRequest trackingVisitedBook = new TrackingRequest(1,1);
+        TrackingRequest trackingVisitedBook = new TrackingRequest("1","1");
 
         this.mvc.perform(post("/visit-book")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -7,15 +7,15 @@ import lombok.ToString;
 public class TrackingVisitedBook {
 
     @Getter
-    private Integer authorId;
+    private String authorId;
 
     @Getter
-    private Integer bookId;
+    private String bookId;
 
     public TrackingVisitedBook() {
     }
 
-    public TrackingVisitedBook(Integer authorId,Integer bookId) {
+    public TrackingVisitedBook(String authorId,String bookId) {
         this.authorId = authorId;
         this.bookId = bookId;
     }

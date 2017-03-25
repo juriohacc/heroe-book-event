@@ -20,7 +20,7 @@ public class TrackingController {
 
     @RequestMapping(value = "/visit-book", method = RequestMethod.POST)
     public void trackVisitBook(@RequestBody @Valid TrackingRequest trackingRequest) {
-        this.log.info("tracking with params  : bookId : ", trackingRequest);
+        this.log.info("tracking with paramsdzadaz  : {} ", trackingRequest);
         this.trackingService.visitBookAction(new TrackingVisitedBook(trackingRequest.getAuthorId(),trackingRequest.getBookId()));
     }
 }
